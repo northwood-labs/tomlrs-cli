@@ -1,0 +1,47 @@
+[project]
+  name = "tomlrs-cli"
+  version = "0.1.0"
+  description = "Read and write values in TOML files while preserving comments and formatting."
+  readme = "README.md"
+  license = "MIT"
+  authors = [ { email = "ryan@ryanparman.com", name = "Ryan Parman" } ]
+  requires-python = ">=3.12"
+  dependencies = [ "tomlrt>=1.7.2,<2" ]
+  keywords = [ "toml", "cli", "round-trip", "config", "edit" ]
+  classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+  ]
+
+  [project.urls]
+    Homepage = "https://github.com/northwood-labs/tomlrs-cli"
+    Repository = "https://github.com/northwood-labs/tomlrs-cli"
+    Issues = "https://github.com/northwood-labs/tomlrs-cli/issues"
+
+  [project.scripts]
+    tomlrs-cli = "tomlrs_cli.cli:main"
+
+[build-system]
+  requires = [ "uv_build>=0.11.17,<0.12.0" ]
+  build-backend = "uv_build"
+
+[dependency-groups]
+  dev = [ "hypothesis", "ruff", "tryke", "zuban" ]
+
+[tool.ruff]
+  target-version = "py312"
+  line-length = 120
+
+  [tool.ruff.lint]
+    select = [ "E", "F", "I", "N", "W", "UP" ]
+
+[tool.tryke]
+  src = [ ".", "src" ]

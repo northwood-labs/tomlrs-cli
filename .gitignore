@@ -1,0 +1,7 @@
+.hypothesis
+.ruff_cache
+.tryke
+.venv
+__pycache__/
+*.egg-info/
+dist/

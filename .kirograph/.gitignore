@@ -1,0 +1,10 @@
+# @config-manager:start kg-comment
+# @config-manager:end kg-comment
+
+# Single file databases
+# @config-manager:start kg-single
+# @config-manager:end kg-single
+
+# Database directories
+# @config-manager:start kg-dir
+# @config-manager:end kg-dir
