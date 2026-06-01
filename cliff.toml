@@ -69,8 +69,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
     { pattern = "(?i)pkg\\.go\\.dev", replace = "`$0`" },
     { pattern = "Bump ([^ ]+)", replace = "Bump `$1`" },
     { pattern = "\\(#([0-9]+)\\)", replace = "([#${1}](@REPO/issues/${1}))" },
-    { pattern = '@REPO', replace = "https://github.com/northwood-labs/tomlrs-cli" },
     # @config-manager:end post-processors
+    { pattern = '@REPO', replace = "https://github.com/northwood-labs/tomlrs-cli" },
   ]
 
 [git]
