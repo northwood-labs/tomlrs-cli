@@ -10,9 +10,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
 
 * [`a79be0e`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/a79be0e77dc332f7312bf2b2d9cfaf438fb522ce): Added `CHANGELOG.md` file for project tracking. ([@skyzyx](https://github.com/skyzyx))
 
+### :dependabot: Building and Dependencies
+
+* [`eacd052`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/eacd052531b1b9c74959cac12d181c7638ff2a4e): **deps**: Bump `actions/checkout` from 6.0.2 to 6.0.3 ([#1](https://github.com/northwood-labs/tomlrs-cli/issues/1)) ([@dependabot](https://github.com/dependabot))
+
 ### <!-- 0 -->:rocket: Features
 
 * [`cf37132`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/cf371321a430f7fef1fd71e4ad0c2e986b82e7a6): Initial commit. ([@skyzyx](https://github.com/skyzyx))
 * [`fefdd63`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/fefdd632ad97d13823032735a4d2f9a784e9fa36): Add automated changelog and contributors workflow. ([@skyzyx](https://github.com/skyzyx))
 
-<p>Generated on 2026-06-01.</p>
+<p>Generated on 2026-06-03.</p>
