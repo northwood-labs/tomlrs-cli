@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
 ### :dependabot: Building and Dependencies
 
 * [`eacd052`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/eacd052531b1b9c74959cac12d181c7638ff2a4e): **deps**: Bump `actions/checkout` from 6.0.2 to 6.0.3 ([#1](https://github.com/northwood-labs/tomlrs-cli/issues/1)) ([@dependabot](https://github.com/dependabot))
+* [`8c857d6`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/8c857d6c84d0f436efbfb59ddd1d4e965bab2565): **deps**: Bump `step-security/harden-runner` from 2.19.3 to 2.19.4 ([#2](https://github.com/northwood-labs/tomlrs-cli/issues/2)) ([@dependabot](https://github.com/dependabot))
 
 ### <!-- 0 -->:rocket: Features
 
