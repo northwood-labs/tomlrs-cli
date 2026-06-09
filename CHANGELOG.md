@@ -19,5 +19,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
 
 * [`cf37132`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/cf371321a430f7fef1fd71e4ad0c2e986b82e7a6): Initial commit. ([@skyzyx](https://github.com/skyzyx))
 * [`fefdd63`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/fefdd632ad97d13823032735a4d2f9a784e9fa36): Add automated changelog and contributors workflow. ([@skyzyx](https://github.com/skyzyx))
+* [`6110308`](https://github.com/northwood-labs/terraform-provider-corefunc/commit/61103084c1c76a21f88b973a1f191f12a832038a): Added pinact and pinact-update linters. ([@skyzyx](https://github.com/skyzyx))
 
-<p>Generated on 2026-06-03.</p>
+<p>Generated on 2026-06-09.</p>
