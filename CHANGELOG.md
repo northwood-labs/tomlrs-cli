@@ -26,5 +26,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
 
 * [`d43f89c`](https://github.com/northwood-labs/tomlrt-cli/commit/d43f89c7e31e0e7de479b9b395cfb0bc8813e636): Standardize formatting and configuration. ([@skyzyx](https://github.com/skyzyx))
 * [`3ec4288`](https://github.com/northwood-labs/tomlrt-cli/commit/3ec4288e790f9eb3bbde0a3dfdf125d028c2618e): Enhanced development infrastructure and tooling. ([@skyzyx](https://github.com/skyzyx))
+* [`88c68ad`](https://github.com/northwood-labs/tomlrt-cli/commit/88c68ade0de73b28f2a3bcebaa7a4eba4b6dd892): Add changelog generation and standardize configuration. ([@skyzyx](https://github.com/skyzyx))
 
 <p>Generated on 2026-06-11.</p>
