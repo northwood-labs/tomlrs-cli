@@ -1,5 +1,5 @@
 """
-CLI entry point for tomlrs-cli.
+CLI entry point for tomlrt-cli.
 
 This module is the sole user-facing interface. It wires argument parsing to
 tomlrt operations so that shell scripts and CI pipelines can read or
@@ -92,8 +92,8 @@ def main() -> int:
     Designed to behave like jq for TOML: read a file, optionally drill into a
     specific path, and emit the result to stdout or a file.
     """
-    parser = argparse.ArgumentParser(prog="tomlrs-cli", description="tomlrs-cli")
-    parser.add_argument("-V", "--version", action="version", version=f"%(prog)s {version('tomlrs-cli')}")
+    parser = argparse.ArgumentParser(prog="tomlrt-cli", description="tomlrt-cli")
+    parser.add_argument("-V", "--version", action="version", version=f"%(prog)s {version('tomlrt-cli')}")
     parser.add_argument("-o", "--output", help="output file path (default: stdout)")
     parser.add_argument("-p", "--path", help="TOML key path")
     parser.add_argument("-v", "--value", help="value to assign to the TOML key path")

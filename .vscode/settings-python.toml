@@ -10,6 +10,7 @@
 'python.defaultInterpreterPath' = 'python3'
 'python.languageServer' = 'Pylance'
 'python.missingPackage.severity' = 'Information'
+'python.pythonPath' = '${workspaceFolder}/.venv/'
 'python.terminal.activateEnvInCurrentTerminal' = true
 'pythonTestExplorer.testFramework' = 'pytest'
 'yapf.args' = [ '-i', '*.py' ]
@@ -17,5 +18,10 @@
 
 # @config-manager:start python
 ['[python]']
+  'editor.defaultFormatter' = 'charliermarsh.ruff'
   'editor.formatOnType' = true
-  # @config-manager:end python
+
+  ['[python]'.'editor.codeActionsOnSave']
+    'source.fixAll.ruff' = 'explicit'
+    'source.organizeImports' = 'always'
+    # @config-manager:end python

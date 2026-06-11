@@ -2,31 +2,29 @@
 
 ## Entry points
 
-| Entry point | Mechanism | Target |
-|-------------|-----------|--------|
-| `tomlrs-cli` shell command | `[project.scripts]` in `pyproject.toml` | `tomlrs_cli.cli:main` |
-| `uvx tomlrs-cli` | PyPI package resolution + same entry point | `tomlrs_cli.cli:main` |
-| `python -m tomlrs_cli.cli` | `if __name__ == "__main__"` guard | `main()` via `sys.exit()` |
+| Entry point                | Mechanism                                  | Target                    |
+|----------------------------|--------------------------------------------|---------------------------|
+| `tomlrt-cli` shell command | `[project.scripts]` in `pyproject.toml`    | `tomlrt_cli.cli:main`     |
+| `uvx tomlrt-cli`           | PyPI package resolution + same entry point | `tomlrt_cli.cli:main`     |
+| `python -m tomlrt_cli.cli` | `if __name__ == "__main__"` guard          | `main()` via `sys.exit()` |
 
 There is exactly one entry point function. All invocation methods converge on `main()`.
 
 ## CLI startup and initialization flow
 
-```
-1. Python runtime loads src/tomlrs_cli/cli.py
+1. Python runtime loads src/tomlrt_cli/cli.py
 2. Module-level imports execute:
-   - argparse, re, sys (stdlib)
-   - tomlrt (third-party, Rust-backed TOML library)
+   * argparse, re, sys (stdlib)
+   * tomlrt (third-party, Rust-backed TOML library)
 3. main() is called by the entry point mechanism
 4. argparse builds the parser with:
-   - -V/--version  (immediate exit with version string)
-   - -o/--output   (optional: file path for output)
-   - -p/--path     (optional: TOML key path to target)
-   - -v/--value    (optional: value to write at --path)
-   - input         (positional: source TOML file)
+   * -V/--version (immediate exit with version string)
+   * -o/--output (optional: file path for output)
+   * -p/--path (optional: TOML key path to target)
+   * -v/--value (optional: value to write at --path)
+   * input (positional: source TOML file)
 5. parser.parse_args() consumes sys.argv
 6. Input file is opened in binary mode and passed to tomlrt.load()
-```
 
 No lazy loading, no plugin system, no configuration files. The startup path is deterministic and has no conditional imports.
 
@@ -34,7 +32,7 @@ No lazy loading, no plugin system, no configuration files. The startup path is d
 
 ### Read entire document (no `--path`)
 
-```
+```text
 tomlrt.load(input) → tomlrt.dumps(doc) → output
 ```
 
@@ -42,7 +40,7 @@ The document passes through tomlrt's round-trip serializer unchanged. Comments, 
 
 ### Read a specific value (`--path` without `--value`)
 
-```
+```text
 tomlrt.load(input)
   → _parse_path(args.path) → tuple of key segments
   → Walk doc[seg1][seg2]...[segN-1]
@@ -55,7 +53,7 @@ The walk stops one segment short of the leaf so we can index the final key for i
 
 ### Write a value (`--path` + `--value`)
 
-```
+```text
 tomlrt.load(input)
   → _parse_path(args.path) → tuple of key segments
   → Walk to parent table
@@ -68,7 +66,7 @@ The value is always assigned as a string. The full modified document is serializ
 
 ### Output routing
 
-```
+```text
 if args.output → open(args.output, "w").write(result)
 else           → sys.stdout.write(result)
 ```
@@ -77,18 +75,18 @@ This is the final step regardless of which flow preceded it. The separation mean
 
 ## File and module responsibilities
 
-### `src/tomlrs_cli/__init__.py`
+### `src/tomlrt_cli/__init__.py`
 
-Package marker only. Contains a single docstring. Exists so Python recognizes `tomlrs_cli` as an importable package.
+Package marker only. Contains a single docstring. Exists so Python recognizes `tomlrt_cli` as an importable package.
 
-### `src/tomlrs_cli/cli.py`
+### `src/tomlrt_cli/cli.py`
 
-| Section | Responsibility |
-|---------|---------------|
-| Module docstring | Documents the module's role as the sole user interface |
-| `_parse_path()` | Converts human-friendly path notation into the tuple format tomlrt requires |
-| `main()` | Orchestrates: parse args → load file → resolve path → read or write → emit output |
-| `if __name__` guard | Enables direct script execution for development/debugging |
+| Section             | Responsibility                                                                    |
+|---------------------|-----------------------------------------------------------------------------------|
+| Module docstring    | Documents the module's role as the sole user interface                            |
+| `_parse_path()`     | Converts human-friendly path notation into the tuple format tomlrt requires       |
+| `main()`            | Orchestrates: parse args → load file → resolve path → read or write → emit output |
+| `if __name__` guard | Enables direct script execution for development/debugging                         |
 
 ### `tests/test_cli.py`
 
@@ -100,11 +98,11 @@ Unit tests for `_parse_path()`. Covers each syntax variant (dotted, quoted, brac
 
 ## Decision points and side effects
 
-### Decision: When does the tool write to disk?
+### Decision: when does the tool write to disk?
 
 Only when `--output` is explicitly provided. This is a deliberate safety choice — without it, the tool is read-only (stdout). Users must opt in to file mutation.
 
-### Decision: Path parsing lives in `cli.py`, not a separate module
+### Decision: path parsing lives in `cli.py`, not a separate module
 
 The parser is ~30 lines. Extracting it to its own module would add import indirection without meaningful encapsulation benefit at this scale. If the parser grows (escape sequences, array indexing), it should be extracted.
 
@@ -114,42 +112,42 @@ TOML files are UTF-8 by spec. Opening in binary mode (`"rb"`) lets tomlrt handle
 
 ### Side effects
 
-| Operation | Side effect |
-|-----------|-------------|
-| `main()` with no `--output` | Writes to stdout |
-| `main()` with `--output` | Creates or overwrites the output file |
+| Operation                            | Side effect                                                          |
+|--------------------------------------|----------------------------------------------------------------------|
+| `main()` with no `--output`          | Writes to stdout                                                     |
+| `main()` with `--output`             | Creates or overwrites the output file                                |
 | `main()` with `--value` + `--output` | Reads input, modifies in memory, writes to output (may be same file) |
 
 ### No side effects
 
-- `_parse_path()` is pure — no I/O, no mutation, deterministic output.
-- `tomlrt.load()` only reads; the file handle is closed immediately after.
+* `_parse_path()` is pure — no I/O, no mutation, deterministic output.
+* `tomlrt.load()` only reads; the file handle is closed immediately after.
 
 ## Risks, gaps, and follow-up inspections
 
-### Risk: Non-atomic file writes
+### Risk: non-atomic file writes
 
 **Current behavior:** `open(path, "w")` truncates the file before writing. If the process is interrupted between truncation and write completion, data is lost.
 
 **Recommendation:** Write to a temporary file in the same directory, then `os.replace()` to the target path. This is atomic on POSIX filesystems.
 
-### Risk: No error handling for missing keys
+### Risk: no error handling for missing keys
 
 **Current behavior:** A `KeyError` propagates as an unhandled exception with a Python traceback.
 
 **Recommendation:** Catch `KeyError` in the path-walk loop and emit a user-friendly error message with the failing segment and available keys.
 
-### Risk: No type coercion for `--value`
+### Risk: no type coercion for `--value`
 
 **Current behavior:** Values are always written as TOML strings. `--value 42` produces `key = "42"`, not `key = 42`.
 
 **Recommendation:** Add a `--type` flag (`string`, `int`, `float`, `bool`) or auto-detect from the value format.
 
-### Gap: No `--create` / `--install` mode
+### Gap: no `--create` / `--install` mode
 
 `tomlrt` has `install()` which creates intermediate tables. The current CLI requires the full path to already exist. Adding an `--install` flag would enable creating new keys.
 
-### Gap: No stdin support
+### Gap: no stdin support
 
 The `input` argument is always a file path. Supporting `-` as stdin would enable piping.
 

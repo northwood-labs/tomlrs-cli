@@ -12,7 +12,7 @@ from contextlib import redirect_stdout
 
 from tryke import describe, expect, test
 
-from tomlrs_cli.cli import main
+from tomlrt_cli.cli import main
 
 SAMPLE_TOML = """\
 # A comment that should survive round-trips
@@ -30,7 +30,7 @@ def _run(*args: str) -> tuple[int, str]:
     Run main() with the given argv and capture stdout.
     Returns (exit_code, stdout_content).
     """
-    sys.argv = ["tomlrs-cli", *args]
+    sys.argv = ["tomlrt-cli", *args]
     buf = io.StringIO()
 
     with redirect_stdout(buf):
@@ -89,7 +89,7 @@ with describe("read a specific value with --path"):
     @test("non-existent path raises KeyError")
     def test_missing_path():
         path = _tmpfile()
-        sys.argv = ["tomlrs-cli", "--path", "does.not.exist", path]
+        sys.argv = ["tomlrt-cli", "--path", "does.not.exist", path]
 
         expect(lambda: main()).to_raise(KeyError)
 
@@ -108,8 +108,13 @@ with describe("write with --value"):
     def test_value_to_file():
         path = _tmpfile()
         code, _ = _run(
-            "--path", "project.version", "--value", "2.0.0",
-            "--output", path, path,
+            "--path",
+            "project.version",
+            "--value",
+            "2.0.0",
+            "--output",
+            path,
+            path,
         )
         expect(code).to_equal(0)
 
@@ -156,6 +161,6 @@ with describe("error cases"):
 
     @test("non-existent input file raises FileNotFoundError")
     def test_missing_file():
-        sys.argv = ["tomlrs-cli", "/tmp/does_not_exist_xyz.toml"]
+        sys.argv = ["tomlrt-cli", "/tmp/does_not_exist_xyz.toml"]
 
         expect(lambda: main()).to_raise(FileNotFoundError)

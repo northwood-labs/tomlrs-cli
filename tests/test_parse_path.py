@@ -11,16 +11,14 @@ from hypothesis import given
 from hypothesis import strategies as st
 from tryke import describe, expect, test
 
-from tomlrs_cli.cli import _parse_path
+from tomlrt_cli.cli import _parse_path
 
 with describe("bare dotted paths"):
 
     @test("simple dotted path")
     def test_simple_dotted():
         # The most common case — plain identifiers separated by dots.
-        expect(_parse_path("version.v26.alpine")).to_equal(
-            ("version", "v26", "alpine")
-        )
+        expect(_parse_path("version.v26.alpine")).to_equal(("version", "v26", "alpine"))
 
     @test("single segment")
     def test_single_segment():
@@ -56,21 +54,15 @@ with describe("double-quoted keys"):
     def test_quoted_dot():
         # Keys like "3.14" contain a dot that must not be treated as a
         # separator. Quoting protects the literal value.
-        expect(_parse_path('version."3.14".alpine')).to_equal(
-            ("version", "3.14", "alpine")
-        )
+        expect(_parse_path('version."3.14".alpine')).to_equal(("version", "3.14", "alpine"))
 
     @test("quoted key at start of path")
     def test_quoted_start():
-        expect(_parse_path('"weird.key".child')).to_equal(
-            ("weird.key", "child")
-        )
+        expect(_parse_path('"weird.key".child')).to_equal(("weird.key", "child"))
 
     @test("quoted key at end of path")
     def test_quoted_end():
-        expect(_parse_path('parent."weird.key"')).to_equal(
-            ("parent", "weird.key")
-        )
+        expect(_parse_path('parent."weird.key"')).to_equal(("parent", "weird.key"))
 
 
 with describe("single-quoted keys"):
@@ -78,9 +70,7 @@ with describe("single-quoted keys"):
     @test("single-quoted key containing a dot")
     def test_single_quoted_dot():
         # Single quotes should work identically to double quotes.
-        expect(_parse_path("version.'3.14'.alpine")).to_equal(
-            ("version", "3.14", "alpine")
-        )
+        expect(_parse_path("version.'3.14'.alpine")).to_equal(("version", "3.14", "alpine"))
 
     @test("single-quoted key at start")
     def test_single_quoted_start():
@@ -92,22 +82,16 @@ with describe("bracket notation"):
     @test("bracket with double quotes")
     def test_bracket_double():
         # Bracket syntax mirrors JavaScript/jq conventions.
-        expect(_parse_path('version["3.14"].alpine')).to_equal(
-            ("version", "3.14", "alpine")
-        )
+        expect(_parse_path('version["3.14"].alpine')).to_equal(("version", "3.14", "alpine"))
 
     @test("bracket with single quotes")
     def test_bracket_single():
-        expect(_parse_path("version['3.14'].alpine")).to_equal(
-            ("version", "3.14", "alpine")
-        )
+        expect(_parse_path("version['3.14'].alpine")).to_equal(("version", "3.14", "alpine"))
 
     @test("unquoted bracket content")
     def test_bracket_unquoted():
         # Unquoted bracket: everything between [ and ] is the key.
-        expect(_parse_path("version[alpine].pin")).to_equal(
-            ("version", "alpine", "pin")
-        )
+        expect(_parse_path("version[alpine].pin")).to_equal(("version", "alpine", "pin"))
 
     @test("bracket at start of path")
     def test_bracket_start():
@@ -119,9 +103,7 @@ with describe("mixed notation"):
     @test("all styles combined in one path")
     def test_mixed():
         # Verifies the parser handles transitions between styles.
-        expect(_parse_path('a["b"].c."d.e"')).to_equal(
-            ("a", "b", "c", "d.e")
-        )
+        expect(_parse_path('a["b"].c."d.e"')).to_equal(("a", "b", "c", "d.e"))
 
     @test("bracket immediately after bracket")
     def test_consecutive_brackets():
@@ -153,8 +135,7 @@ with describe("property-based tests"):
     @given(
         st.lists(
             st.text(
-                alphabet=st.characters(whitelist_categories=("L", "N", "P"),
-                                       blacklist_characters='"\'[]'),
+                alphabet=st.characters(whitelist_categories=("L", "N", "P"), blacklist_characters='"\'[]'),
                 min_size=1,
                 max_size=10,
             ),

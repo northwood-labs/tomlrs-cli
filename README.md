@@ -1,10 +1,10 @@
-# tomlrs-cli
+# tomlrt-cli
 
 A command-line tool for reading and writing values in TOML files while preserving comments, formatting, and key ordering. Think `jq`, but for TOML.
 
 ## Why use this?
 
-Most TOML libraries either can't write (Python's `tomllib`) or destroy comments and formatting when they do (`tomli-w`). `tomlrs-cli` uses a round-trip parser under the hood, so you can update a single value in a TOML file from a shell script or CI pipeline without mangling the rest of the document.
+Most TOML libraries either can't write (Python's `tomllib`) or destroy comments and formatting when they do (`tomli-w`). `tomlrt-cli` uses a round-trip parser under the hood, so you can update a single value in a TOML file from a shell script or CI pipeline without mangling the rest of the document.
 
 Common use cases:
 
@@ -21,7 +21,7 @@ Common use cases:
 No prerequisites for end users — install and run directly with `uvx`:
 
 ```bash
-uvx tomlrs-cli --help
+uvx tomlrt-cli --help
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ uvx tomlrs-cli --help
 ### Read an entire file
 
 ```bash
-tomlrs-cli config.toml
+tomlrt-cli config.toml
 ```
 
 Outputs the full document to stdout (comments and formatting preserved).
@@ -37,7 +37,7 @@ Outputs the full document to stdout (comments and formatting preserved).
 ### Read a specific value
 
 ```bash
-tomlrs-cli --path project.version pyproject.toml
+tomlrt-cli --path project.version pyproject.toml
 ```
 
 Outputs just the value at that path.
@@ -45,7 +45,7 @@ Outputs just the value at that path.
 ### Write a value (to stdout)
 
 ```bash
-tomlrs-cli --path project.version --value "2.0.0" pyproject.toml
+tomlrt-cli --path project.version --value "2.0.0" pyproject.toml
 ```
 
 Outputs the full modified document to stdout. The original file is not changed.
@@ -53,7 +53,7 @@ Outputs the full modified document to stdout. The original file is not changed.
 ### Write a value (to file)
 
 ```bash
-tomlrs-cli --path project.version --value "2.0.0" --output pyproject.toml pyproject.toml
+tomlrt-cli --path project.version --value "2.0.0" --output pyproject.toml pyproject.toml
 ```
 
 Writes the modified document to the output file. Use the same path for input and output to edit in-place.
@@ -64,13 +64,13 @@ Keys are separated by dots. Keys that contain dots or special characters can be 
 
 ```bash
 # Simple dotted path
-tomlrs-cli --path version.v26.alpine config.toml
+tomlrt-cli --path version.v26.alpine config.toml
 
 # Quoted key (key "3.14" contains a dot)
-tomlrs-cli --path 'version."3.14".alpine' config.toml
+tomlrt-cli --path 'version."3.14".alpine' config.toml
 
 # Bracket notation (same result)
-tomlrs-cli --path 'version["3.14"].alpine' config.toml
+tomlrt-cli --path 'version["3.14"].alpine' config.toml
 ```
 
 All three notations are interchangeable and can be mixed in a single path.
@@ -91,7 +91,7 @@ All three notations are interchangeable and can be mixed in a single path.
 
 ```bash
 git clone <repo-url>
-cd tomlrs-cli
+cd tomlrt-cli
 uv sync
 ```
 
@@ -132,7 +132,7 @@ The path does not exist in the document. Double-check key names — TOML keys ar
 Make sure your shell isn't stripping the quotes. Wrap the entire `--path` value in single quotes:
 
 ```bash
-tomlrs-cli --path 'version."3.14".alpine' config.toml
+tomlrt-cli --path 'version."3.14".alpine' config.toml
 ```
 
 ### `--value` didn't change the file
@@ -140,9 +140,9 @@ tomlrs-cli --path 'version."3.14".alpine' config.toml
 Without `--output`, changes go to stdout only. Add `--output <file>` to persist:
 
 ```bash
-tomlrs-cli --path key --value new --output config.toml config.toml
+tomlrt-cli --path key --value new --output config.toml config.toml
 ```
 
 ### `ModuleNotFoundError: tomlrt`
 
-Run via `uv run tomlrs-cli` (which manages the virtualenv) or install with `uv sync` first.
+Run via `uv run tomlrt-cli` (which manages the virtualenv) or install with `uv sync` first.

@@ -1,6 +1,6 @@
 # Agent Guidance
 
-This document orients AI agents working on `tomlrs-cli`. Read this first; it points to detailed references that you should load only when relevant to your current task.
+This document orients AI agents working on `tomlrt-cli`. Read this first; it points to detailed references that you should load only when relevant to your current task.
 
 ## What this project is
 
@@ -9,7 +9,7 @@ A CLI tool that reads and writes TOML files with comment/formatting preservation
 ## Project layout
 
 ```text
-src/tomlrs_cli/
+src/tomlrt_cli/
   __init__.py        # Package marker (no logic)
   cli.py             # Sole module: arg parsing, path resolution, read/write
 tests/
@@ -59,7 +59,7 @@ Located in `.kiro/steering/`. These are automatically loaded based on their `inc
 | File                         | When loaded                     | What it controls                              |
 |------------------------------|---------------------------------|-----------------------------------------------|
 | `core-premises.md`           | Always                          | Fundamental operating principles              |
-| `kirograph.md`               | Always                          | KiroGraph tool usage guide                    |
+| `kirograph.md`               | Always                          | Kirograph tool usage guide                    |
 | `python-code-conventions.md` | When editing `*.py` files       | Python style, type checking, formatting rules |
 | `markdown-style.md`          | When editing `*.md` files       | Markdown formatting conventions               |
 | `kirograph-review.md`        | Manual (code review tasks)      | Structured review workflow                    |
@@ -77,7 +77,7 @@ Located in `.kiro/hooks/`:
 | Hook                                | Trigger               | Effect                                                  |
 |-------------------------------------|-----------------------|---------------------------------------------------------|
 | `kirograph-compress-hint.kiro.hook` | Before shell tool use | Reminds agent to use `kirograph_exec` for token savings |
-| `kirograph-sync-if-dirty.kiro.hook` | Agent stop            | Syncs KiroGraph index with file changes                 |
+| `kirograph-sync-if-dirty.kiro.hook` | Agent stop            | Syncs Kirograph index with file changes                 |
 
 ## Agents
 
@@ -85,11 +85,11 @@ Located in `.kiro/agents/`:
 
 | Agent            | Role                                                                      |
 |------------------|---------------------------------------------------------------------------|
-| `kirograph.json` | KiroGraph-aware agent with full MCP tool access for code graph operations |
+| `kirograph.json` | Kirograph-aware agent with full MCP tool access for code graph operations |
 
-## KiroGraph usage
+## Kirograph usage
 
-This project has a `.kirograph/` directory. Use KiroGraph MCP tools instead of grep/glob/file reads:
+This project has a `.kirograph/` directory. Use Kirograph MCP tools instead of grep/glob/file reads:
 
 * `kirograph_context(task: "...")` — Start here for any code task
 * `kirograph_search(query: "...")` — Find symbols by name

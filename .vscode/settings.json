@@ -12,6 +12,11 @@
     "editor.defaultFormatter": "fcrespo82.markdown-table-formatter"
   },
   "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports": "always"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnType": true
   },
   "[shellscript]": {
@@ -56,6 +61,7 @@
     "*.hcl": "terraform",
     "*.ini": "ini",
     "*.instructions.md": "markdown",
+    "*.kiro.hook": "json",
     "*.md": "markdown",
     "*.prompt.md": "markdown",
     "*.sh": "shellscript",
@@ -65,6 +71,7 @@
     ".style.yapf": "ini",
     ".terraformrc": "hcl",
     "Brewfile*": "ruby",
+    "Dockerfile*": "dockerfile",
     "config": "ini"
   },
   "files.eol": "\n",
@@ -143,7 +150,7 @@
   "kiroAgent.agentAutonomy": "Autopilot",
   "kiroAgent.enableCodebaseIndexing": true,
   "kiroAgent.enableTabAutocomplete": true,
-  "kiroAgent.modelSelection": "auto",
+  "kiroAgent.modelSelection": "Auto",
   "kiroAgent.notifications.agent.actionRequired": true,
   "kiroAgent.notifications.agent.failure": true,
   "kiroAgent.notifications.agent.success": true,
@@ -201,6 +208,7 @@
   "python.defaultInterpreterPath": "python3",
   "python.languageServer": "Pylance",
   "python.missingPackage.severity": "Information",
+  "python.pythonPath": "${workspaceFolder}/.venv/",
   "python.terminal.activateEnvInCurrentTerminal": true,
   "pythonTestExplorer.testFramework": "pytest",
   "remote.defaultExtensionsIfInstalledLocally": [
