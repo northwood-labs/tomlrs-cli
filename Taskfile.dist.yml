@@ -22,7 +22,9 @@ vars:
   # Explicitly define these paths to point to Homebrew-installed GNU versions.
   BASH: /opt/homebrew/opt/bash/bin/bash
   FIND: /opt/homebrew/opt/findutils/bin/gfind
-  RM: /opt/homebrew/opt/coreutils/libexec/gnubin/rm
+  GREP: /opt/homebrew/opt/grep/bin/ggrep
+  RM: /opt/homebrew/opt/coreutils/bin/grm
+  SED: /opt/homebrew/opt/gsed/bin/gsed
   XARGS: /opt/homebrew/opt/findutils/bin/gxargs
   # @config-manager:end standard-vars
 
@@ -38,10 +40,26 @@ includes:
     taskfile: ./tools/Taskfile.internal.yml
   # @config-manager:end standard
 
+  # @config-manager:start aws-user
+  aws:
+    taskfile: ./tools/Taskfile.aws.yml
+    optional: true
+  # @config-manager:end aws-user
+
+  # @config-manager:start golang
+  go:
+    taskfile: ./tools/Taskfile.golang.yml
+    flatten: true
+    optional: true
+    # @config-manager:end golang
+    vars:
+      GO_VER: 1.26.4
+
   # @config-manager:start python
   python:
     taskfile: ./tools/Taskfile.python.yml
     flatten: true
+    optional: true
     # @config-manager:end python
 
 tasks:
@@ -62,7 +80,7 @@ tasks:
         msg: "hk must be installed to manage hooks. Run 'task install:tools` first."
     cmds:
       - task: internal:header
-        vars: { TEXT: "Installing Git hooks..." }
+        vars: {TEXT: "Installing Git hooks..."}
       - hk install
 
   install:tools:
@@ -74,10 +92,11 @@ tasks:
       in arbitrary order.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Installing dependencies from Brewfiles..." }
+        vars: {TEXT: "Installing dependencies from Brewfiles..."}
       - >
         gfind ./tools -type f -name "Brewfile.*"
         | gxargs -I% brew bundle --upgrade --upgrade-formulae --install --jobs=auto --file="%"
+      - vet https://raw.githubusercontent.com/mtdowling/chag/master/install.sh
   # @config-manager:end installation-standard
   # @config-manager:start gitconfig-standard
   gitconfig:
@@ -90,7 +109,7 @@ tasks:
       merge tool.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Configuring project Git configuration..." }
+        vars: {TEXT: "Configuring project Git configuration..."}
       - git config blame.ignoreRevsFile .git-blame-ignore-revs
   # @config-manager:end gitconfig-standard
 
@@ -130,7 +149,7 @@ tasks:
       Goal is for this to complete in under 5 seconds.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Linting changed files..." }
+        vars: {TEXT: "Linting changed files..."}
       - hk fix --no-fail-fast
 
   lint:full:
@@ -143,7 +162,7 @@ tasks:
       linting everything.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Linting changed files..." }
+        vars: {TEXT: "Linting changed files..."}
       - hk fix --no-fail-fast --profile slow
 
   lint:*:
@@ -154,7 +173,7 @@ tasks:
       STEP: "{{ index .MATCH 0 }}"
     cmds:
       - task: internal:header
-        vars: { TEXT: "Linting changed files with {{ .STEP }}..." }
+        vars: {TEXT: "Linting changed files with {{ .STEP }}..."}
       - hk fix --no-fail-fast --step {{ .STEP }} --profile slow
 
   lint:deep:
@@ -166,7 +185,7 @@ tasks:
       the repository. This is slower, but more comprehensive.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Linting ALL files..." }
+        vars: {TEXT: "Linting ALL files..."}
       - hk fix --all --no-fail-fast
 
   lint:deep:full:
@@ -178,7 +197,7 @@ tasks:
       the repository. This is slower, but more comprehensive.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Linting ALL files with ALL (including slow) tools..." }
+        vars: {TEXT: "Linting ALL files with ALL (including slow) tools..."}
       - hk fix --all --no-fail-fast --profile slow
 
   lint:deep:*:
@@ -189,7 +208,7 @@ tasks:
       STEP: "{{ index .MATCH 0 }}"
     cmds:
       - task: internal:header
-        vars: { TEXT: "Linting ALL files with {{ .STEP }}..." }
+        vars: {TEXT: "Linting ALL files with {{ .STEP }}..."}
       - hk fix --all --no-fail-fast --step {{ .STEP }} --profile slow
 
   lint:list:
@@ -308,7 +327,7 @@ tasks:
       Gets list of software licenses in-use.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Detecting software licenses..." }
+        vars: {TEXT: "Detecting software licenses..."}
       - trivy fs --config trivy-license.yaml --format json . 2>/dev/null > .licenses.cache.json
       - silent: true
         cmd: |
@@ -360,7 +379,7 @@ tasks:
       These are user-specific and do not belong in any Git repo.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Cleaning .DS_Store files..." }
+        vars: {TEXT: "Cleaning .DS_Store files..."}
       - '{{ .FIND }} . -type f -name ".DS_Store" | {{ .XARGS }} -I% {{ .RM }} -fv "%"'
 
   clean:lychee:
@@ -371,7 +390,7 @@ tasks:
       Cleans the Lychee report and cache files from disk.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Cleaning Lychee artifacts..." }
+        vars: {TEXT: "Cleaning Lychee artifacts..."}
       - "{{ .RM }} -vf .lychee* lychee.md"
   # @config-manager:end cleaning-standard
 
@@ -388,9 +407,50 @@ tasks:
       made to this repository.
     cmds:
       - task: internal:header
-        vars: { TEXT: "Generating CHANGELOG..." }
+        vars: {TEXT: "Generating CHANGELOG..."}
       - git cliff --output CHANGELOG.md --github-repo "$(git remote get-url origin | cut -d':' -f2 | sed -E 's,\.git,,' | tr -d "\n")"
     requires:
       vars:
         - GITHUB_TOKEN
+
+  tag:
+    desc: "Sign and tag a new Git version."
+    summary: |
+      Signs and tag a new Git version.
+
+      The workspace MUST be clean to tag a new release.
+    vars:
+      NEXT_VERSION:
+        sh: git cliff --bump --unreleased --context | jq -r .[0].version
+    preconditions:
+      - sh: "[$(git status -s -uall | wc -l) != 1]"
+        msg: "Git workspace must be clean."
+      - sh: command -v chag
+        msg: "chag must be installed to handle tagging. Run 'task install:tools` first."
+      - sh: command -v git-cliff
+        msg: "git-cliff must be installed to handle the CHANGELOG. Run 'task install:tools` first."
+    cmds:
+      - task: internal:header
+        vars: {TEXT: "Signing and tagging the release..."}
+      - task: internal:bold
+        vars: {TEXT: "This release will be tagged as: {{ .NEXT_VERSION }}"}
+      - cmd: echo "---------------------------------------------------------------------"
+        silent: true
+      - task: internal:prompt
+        vars: {TEXT: "Do you want to continue with this version number?"}
+      - cmd: chag update "{{ .NEXT_VERSION }}"
+      - task: internal:header
+        vars: {TEXT: "These are the contents of the CHANGELOG for this release."}
+      - cmd: echo "---------------------------------------------------------------------"
+        silent: true
+      - cmd: chag contents
+        silent: true
+      - cmd: echo "---------------------------------------------------------------------"
+        silent: true
+      - task: internal:prompt
+        vars: {TEXT: "Are these release notes correct? If not, cancel and update CHANGELOG.md."}
+      - cmd: git add .
+      - cmd: >
+          git commit -a -m "relprep: Preparing the {{ .NEXT_VERSION }} release." --no-verify
+      - cmd: chag tag --sign --force
   # @config-manager:end commits-standard

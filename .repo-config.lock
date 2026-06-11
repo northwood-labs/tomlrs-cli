@@ -137,9 +137,9 @@ source_hash = ''
 dest_hash = 'sha256:976dc44e80ad09b5dc28fc020566782e9f9845371091f540b64628592f92c291'
 
 [files.'Taskfile.dist.yml']
-last_sync_time = '2026-06-11T20:57:38Z'
+last_sync_time = '2026-06-11T22:01:48Z'
 source_hash = ''
-dest_hash = 'sha256:05abc09e84308c570c93cc79a0bdef40d447217c75357de56c149552a4eeae6a'
+dest_hash = 'sha256:3766d2b4297d4af12cecea92026ac148756ec9759f68a0d8cdc7855e46402b9e'
 
 [files.'cliff.toml']
 last_sync_time = '2026-06-11T20:57:38Z'
@@ -147,9 +147,9 @@ source_hash = ''
 dest_hash = 'sha256:37061e74f1b708d6fc3b4c57ff7bc9fd4eb81bed5d017d5b36a1523c963e976d'
 
 [files.'ecrc.toml']
-last_sync_time = '2026-06-11T19:33:01Z'
+last_sync_time = '2026-06-11T22:01:48Z'
 source_hash = ''
-dest_hash = 'sha256:df1324f05e08ace4c6b6c309b712a3d74e589f80f504941b6cb8ea94b36ab6ed'
+dest_hash = 'sha256:4de969ffd7405b569370824afd2eb728a5a66c500aeb5e2dea234dba8bb2cd9e'
 
 [files.'hk.pkl']
 last_sync_time = '2026-06-03T03:27:40Z'
@@ -177,9 +177,9 @@ source_hash = ''
 dest_hash = 'sha256:a15d99707ef6e2b67bfc450e2c8a772d7a4b5753eb242328c6b26e896b6272be'
 
 [files.'tools/Brewfile.standard']
-last_sync_time = '2026-06-11T20:32:33Z'
+last_sync_time = '2026-06-11T22:01:48Z'
 source_hash = ''
-dest_hash = 'sha256:83b620e9314560ae81803d3ad26d651c753f272ce660d47ff46eb3c1f59355cf'
+dest_hash = 'sha256:23e47e942eafa5250aab18862134d6e002afbb50476e5b38c7ae27393aeacfd2'
 
 [files.'tools/Taskfile.admin.yml']
 last_sync_time = '2026-06-01T19:58:53Z'
@@ -192,9 +192,9 @@ source_hash = ''
 dest_hash = 'sha256:9cec8f98d69082fe0ee64561040aac7d45fc2ddd9c9a32935d4f230cd0770bb5'
 
 [files.'tools/Taskfile.internal.yml']
-last_sync_time = '2026-06-03T03:27:40Z'
+last_sync_time = '2026-06-11T22:01:48Z'
 source_hash = ''
-dest_hash = 'sha256:68308208fc2469cf31af812a1bb854fa6a1c5d9ccd9fb86f02bbce76b9252847'
+dest_hash = 'sha256:a8f825a0cfa50afc520bcf3683159bcbc6e07be5a64702a0b0623cc64b2e5323'
 
 [files.'tools/Taskfile.python.yml']
 last_sync_time = '2026-06-11T20:38:38Z'

@@ -41,8 +41,8 @@ brew "git-delta"
 # https://github.com/newren/git-filter-repo
 brew "git-filter-repo"
 
-# https://github.com/nvie/gitflow
-brew "git-flow"
+# https://git-flow.sh
+brew "git-flow-next"
 
 # https://git-lfs.com/
 brew "git-lfs"
