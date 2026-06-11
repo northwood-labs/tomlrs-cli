@@ -70,7 +70,10 @@
     "@kirograph/kirograph_security_flows",
     "@kirograph/kirograph_supply_chain",
     "@kirograph/kirograph_dep_confusion",
-    "@kirograph/kirograph_remediation"
+    "@kirograph/kirograph_remediation",
+    "@kirograph/kirograph_pattern_coverage",
+    "@kirograph/kirograph_pattern_save_baseline",
+    "@kirograph/kirograph_pattern_diff"
   ],
   "useLegacyMcpJson": true,
   "hooks": {

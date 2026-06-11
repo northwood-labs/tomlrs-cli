@@ -117,8 +117,8 @@ task lint
 ### Build and publish
 
 ```bash
-uv build       # Produces sdist + wheel in dist/
-uv publish     # Upload to PyPI
+task build       # Produces sdist + wheel in dist/
+task publish     # Upload to PyPI
 ```
 
 ## Troubleshooting

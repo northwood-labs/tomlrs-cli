@@ -95,6 +95,24 @@ tasks:
   # @config-manager:end gitconfig-standard
 
   #-----------------------------------------------------------------------------
+  # Building and packaging
+
+  build:
+    desc: "! Run all standard building tasks."
+    summary: |
+      Runs all standard building tasks.
+
+      This runs all `build:*` tasks. We do this by exporting a list of tasks to
+      JSON, parsing it with jq, then using a for-loop to call the matches.
+    vars:
+      TASKS:
+        sh: task --list --json | jq -Mr '.tasks[] | select(.name | startswith("build:")) | .name'
+    cmds:
+      - for:
+          var: TASKS
+        task: "{{ .ITEM }}"
+
+  #-----------------------------------------------------------------------------
   # Linting and code quality
 
   # @config-manager:start linting-standard

@@ -20,17 +20,28 @@ tasks:
   #-----------------------------------------------------------------------------
   # Building
 
-  build:
-    desc: Bundle the code into a package
+  publish:py:
+    desc: Publish the code to Pypi
     summary: |
-      Bundles the code into a package.
-
-      @TODO
+      Publishes the code to Pypi.
     cmds:
       - task: internal:header
         vars:
-          TEXT: "Packaging..."
-      - cmd: echo "@TODO"
+          TEXT: "Publishing the code to Pypi..."
+      - cmd: task publish
+    requires:
+      vars:
+        - UV_PUBLISH_TOKEN
+
+  build:py:
+    desc: Bundle the code into a package
+    summary: |
+      Bundles the code into a package.
+    cmds:
+      - task: internal:header
+        vars:
+          TEXT: "Packaging the code for release..."
+      - cmd: uv build
 
   deps:py:
     desc: Update packages to their latest versions supported by the range in pyproject.toml.

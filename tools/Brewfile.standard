@@ -10,12 +10,19 @@ tap "go-task/tap"
 tap "okooo5km/tap"
 tap "oven-sh/bun"
 tap "trufflesecurity/trufflehog"
+tap "vet-run/vet"
 # @config-manager:end taps
 
 #-------------------------------------------------------------------------------
 # FORMULAE
 
 # @config-manager:start brew
+# https://aube.en.dev
+brew "aube"
+
+# https://github.com/sharkdp/bat
+brew "bat"
+
 # https://bun.sh/
 brew "bun"
 
@@ -97,6 +104,9 @@ brew "trivy"
 # https://github.com/trufflesecurity/trufflehog
 brew "trufflesecurity/trufflehog/trufflehog"
 
+# https://github.com/vet-run/vet
+brew "vet-run/vet/vet-run"
+
 # https://github.com/google/yamlfmt
 brew "yamlfmt"
 # @config-manager:end brew
@@ -105,8 +115,6 @@ brew "yamlfmt"
 # NPM
 
 # @config-manager:start npm
-# https://www.npmjs.com/package/@endevco/aube
-npm "@endevco/aube"
 # @config-manager:end npm
 
 #-------------------------------------------------------------------------------
