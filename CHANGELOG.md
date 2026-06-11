@@ -4,14 +4,6 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com), adheres to [Semantic Versioning](https://semver.org), and uses [Conventional Commit](https://www.conventionalcommits.org) syntax.
 
-## Unreleased
-
-[Compare: v1.0.1 → `HEAD`](https://github.com/northwood-labs/tomlrt-cli/compare/v1.0.1..HEAD)
-
-### <!-- ZZZ -->:gear: Miscellaneous Tasks
-
-* [`941b9b6`](https://github.com/northwood-labs/tomlrt-cli/commit/941b9b65ec7ea6fcd405fe710ce77d8995d4ed89): Enhance tooling and add release tagging support. ([@skyzyx](https://github.com/skyzyx))
-
 ## 1.0.1 — 2026-06-11
 
 ### :books: Documentation
@@ -30,10 +22,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
 * [`6110308`](https://github.com/northwood-labs/tomlrt-cli/commit/61103084c1c76a21f88b973a1f191f12a832038a): Added pinact and pinact-update linters. ([@skyzyx](https://github.com/skyzyx))
 * [`b551b41`](https://github.com/northwood-labs/tomlrt-cli/commit/b551b4192c129e39e6119df0fa0cbf1089be78fd): Rename project to tomlrt-cli and modernize tooling. ([@skyzyx](https://github.com/skyzyx))
 
+### <!-- 1 -->:bug: Bug Fixes
+
+* [`bf257f3`](https://github.com/northwood-labs/tomlrt-cli/commit/bf257f39f3d2897b0f7e41db5a2f6ce0a8c32b03): Resolved a typo. ([@skyzyx](https://github.com/skyzyx))
+
 ### <!-- ZZZ -->:gear: Miscellaneous Tasks
 
 * [`d43f89c`](https://github.com/northwood-labs/tomlrt-cli/commit/d43f89c7e31e0e7de479b9b395cfb0bc8813e636): Standardize formatting and configuration. ([@skyzyx](https://github.com/skyzyx))
 * [`3ec4288`](https://github.com/northwood-labs/tomlrt-cli/commit/3ec4288e790f9eb3bbde0a3dfdf125d028c2618e): Enhanced development infrastructure and tooling. ([@skyzyx](https://github.com/skyzyx))
 * [`88c68ad`](https://github.com/northwood-labs/tomlrt-cli/commit/88c68ade0de73b28f2a3bcebaa7a4eba4b6dd892): Add changelog generation and standardize configuration. ([@skyzyx](https://github.com/skyzyx))
+* [`941b9b6`](https://github.com/northwood-labs/tomlrt-cli/commit/941b9b65ec7ea6fcd405fe710ce77d8995d4ed89): Enhance tooling and add release tagging support. ([@skyzyx](https://github.com/skyzyx))
 
 <p>Generated on 2026-06-11.</p>
