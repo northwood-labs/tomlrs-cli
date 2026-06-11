@@ -67,9 +67,9 @@ source_hash = ''
 dest_hash = 'dir:initialized'
 
 [files.'.rumdl.toml']
-last_sync_time = '2026-06-11T19:33:00Z'
+last_sync_time = '2026-06-11T20:38:38Z'
 source_hash = ''
-dest_hash = 'sha256:a35b7e935b206a5a33987a3e82a4ba5dc6e259d7508183d95ea9e32fd1728d82'
+dest_hash = 'sha256:57eba8b177e689e4c4940c241c2b11d4142e47684b94e2f3a6f432688f3a5042'
 
 [files.'.shellcheckrc']
 last_sync_time = '2026-06-03T03:27:40Z'
@@ -112,7 +112,7 @@ source_hash = ''
 dest_hash = 'sha256:8a6f92cdea30d6c0b3b797f1541cbac5910dec52a07ff6c27b0134c41cb2e871'
 
 [files.'.vscode/settings-python.toml']
-last_sync_time = '2026-06-11T20:32:33Z'
+last_sync_time = '2026-06-11T20:38:38Z'
 source_hash = ''
 dest_hash = 'sha256:369aeb4d1b9783a8d556d15e9345c9a112afede570041e9c3007a7cef6305799'
 
@@ -137,14 +137,14 @@ source_hash = ''
 dest_hash = 'sha256:976dc44e80ad09b5dc28fc020566782e9f9845371091f540b64628592f92c291'
 
 [files.'Taskfile.dist.yml']
-last_sync_time = '2026-06-11T20:32:33Z'
+last_sync_time = '2026-06-11T20:57:38Z'
 source_hash = ''
-dest_hash = 'sha256:48bdcc8f3f6cdfe2f29207d4002f4f353cc40a9e58b1c81fe92be4dc2a8b822d'
+dest_hash = 'sha256:05abc09e84308c570c93cc79a0bdef40d447217c75357de56c149552a4eeae6a'
 
 [files.'cliff.toml']
-last_sync_time = '2026-06-11T20:32:33Z'
+last_sync_time = '2026-06-11T20:57:38Z'
 source_hash = ''
-dest_hash = 'sha256:0be90da0e04eceb884a4034bfcd21b9543e76b179a15c688ae2b31681cea4861'
+dest_hash = 'sha256:37061e74f1b708d6fc3b4c57ff7bc9fd4eb81bed5d017d5b36a1523c963e976d'
 
 [files.'ecrc.toml']
 last_sync_time = '2026-06-11T19:33:01Z'
@@ -197,9 +197,9 @@ source_hash = ''
 dest_hash = 'sha256:68308208fc2469cf31af812a1bb854fa6a1c5d9ccd9fb86f02bbce76b9252847'
 
 [files.'tools/Taskfile.python.yml']
-last_sync_time = '2026-06-11T20:32:33Z'
+last_sync_time = '2026-06-11T20:38:38Z'
 source_hash = ''
-dest_hash = 'sha256:51cb2fd68aa41452b032540e863668e01cdedc9ac4d5df7060bb1b24dcd9aa78'
+dest_hash = 'sha256:f3dea2a5420be57aac220e6ca972dc6156af2443e392af1a6d3a7d2078601ca6'
 
 [files.'tools/ogvs.config.yaml']
 last_sync_time = '2026-06-03T03:27:40Z'

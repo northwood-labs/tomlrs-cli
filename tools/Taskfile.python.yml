@@ -12,9 +12,6 @@ set: [pipefail]
 shopt: [globstar]
 
 vars:
-# BASH: /opt/homebrew/opt/bash/bin/bash
-# FIND: /opt/homebrew/opt/findutils/bin/gfind
-# XARGS: /opt/homebrew/opt/findutils/bin/gxargs
 
 tasks:
   #-----------------------------------------------------------------------------
@@ -28,7 +25,7 @@ tasks:
       - task: internal:header
         vars:
           TEXT: "Publishing the code to Pypi..."
-      - cmd: task publish
+      - cmd: uv publish
     requires:
       vars:
         - UV_PUBLISH_TOKEN

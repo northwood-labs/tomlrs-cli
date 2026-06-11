@@ -7,7 +7,7 @@
 
 [remote.github]
   owner = "northwood-labs"
-  repo = "tomlrt-cli"
+  repo = ""
 
 [changelog]
   # @config-manager:start changelog-content
@@ -44,7 +44,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
   {%- endfor %}
 {% endfor %}
 {%- macro remote_url() -%}
-  https://github.com/northwood-labs/terraform-provider-corefunc
+  https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
 {%- endmacro -%}
 """
 
@@ -70,7 +70,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
     { pattern = "Bump ([^ ]+)", replace = "Bump `$1`" },
     { pattern = "\\(#([0-9]+)\\)", replace = "([#${1}](@REPO/issues/${1}))" },
     # @config-manager:end post-processors
-    { pattern = "@REPO", replace = "https://github.com/northwood-labs/tomlrt-cli" },
   ]
 
 [git]
@@ -116,23 +115,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
   # regex for parsing and grouping commits
   commit_parsers = [
     # @config-manager:start commit-parsers
-    { group = "<!-- 0 -->:rocket: Features", message = "^feat" },
-    { group = "<!-- 1 -->:bug: Bug Fixes", message = "^fix" },
-    { group = "<!-- 2 -->:racecar: Performance", message = "^perf" },
-    { group = ":books: Documentation", message = "^docs" },
-    { group = ":tractor: Refactor", message = "^refactor" },
-    { group = ":art: Styling", message = "^style" },
-    { group = ":dependabot: Building and Dependencies", message = "^build|deps" },
-    { group = ":test_tube: Testing", message = "^test" },
-    { group = ":soap: Linting", message = "^lint" },
+    { message = "^feat", group = "<!-- 0 -->:rocket: Features" },
+    { message = "^fix", group = "<!-- 1 -->:bug: Bug Fixes" },
+    { message = "^perf", group = "<!-- 2 -->:racecar: Performance" },
+    { message = "^docs", group = ":books: Documentation" },
+    { message = "^refactor", group = ":tractor: Refactor" },
+    { message = "^style", group = ":art: Styling" },
+    { message = "^build|deps", group = ":dependabot: Building and Dependencies" },
+    { message = "^test", group = ":test_tube: Testing" },
+    { message = "^lint", group = ":soap: Linting" },
     { message = "^chore\\(release\\): prepare for", skip = true },
     { message = "^chore\\(deps\\)", skip = true },
     { message = "^chore\\(pr\\)", skip = true },
     { message = "^chore\\(pull\\)", skip = true },
     { message = "^relprep", skip = true },
-    { group = "<!-- ZZZ -->:gear: Miscellaneous Tasks", message = "^chore|ci" },
+    { message = "^chore|ci", group = "<!-- ZZZ -->:gear: Miscellaneous Tasks" },
     { body = ".*security", group = ":closed_lock_with_key: Security" },
-    { group = "<!-- ZYY -->:x: Revert", message = "^revert" },
+    { message = "^revert", group = "<!-- ZYY -->:x: Revert" },
     { message = "^automation", skip = true },
     # @config-manager:end commit-parsers
   ]

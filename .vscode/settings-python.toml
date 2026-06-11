@@ -21,7 +21,7 @@
   'editor.defaultFormatter' = 'charliermarsh.ruff'
   'editor.formatOnType' = true
 
-  ['[python]'.'editor.codeActionsOnSave']
-    'source.fixAll.ruff' = 'explicit'
-    'source.organizeImports' = 'always'
+['[python]'.'editor.codeActionsOnSave']
+  'source.fixAll.ruff' = 'explicit'
+  'source.organizeImports' = 'always'
     # @config-manager:end python
