@@ -7,11 +7,16 @@ variant produces the correct segment tuple, and that the parser doesn't
 silently mangle bare keys under randomised input.
 """
 
+from typing import Literal
+
 from hypothesis import given
 from hypothesis import strategies as st
 from tryke import describe, expect, test
 
 from tomlrt_cli.cli import _parse_path
+
+# Unicode general categories for Hypothesis character strategies.
+_UNICODE_CATEGORIES: tuple[Literal["L"], Literal["N"], Literal["P"]] = ("L", "N", "P")
 
 with describe("bare dotted paths"):
 
@@ -135,7 +140,7 @@ with describe("property-based tests"):
     @given(
         st.lists(
             st.text(
-                alphabet=st.characters(whitelist_categories=("L", "N", "P"), blacklist_characters='"\'[]'),
+                alphabet=st.characters(whitelist_categories=_UNICODE_CATEGORIES, blacklist_characters="\"'[]"),
                 min_size=1,
                 max_size=10,
             ),
