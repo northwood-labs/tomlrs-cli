@@ -423,7 +423,7 @@ tasks:
       NEXT_VERSION:
         sh: git cliff --bump --unreleased --context | jq -r .[0].version
     preconditions:
-      - sh: "[$(git status -s -uall | wc -l) != 1]"
+      - sh: "[$(git status -s -uall | wc -l) == 1]"
         msg: "Git workspace must be clean."
       - sh: command -v chag
         msg: "chag must be installed to handle tagging. Run 'task install:tools` first."
