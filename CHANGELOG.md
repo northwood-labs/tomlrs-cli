@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), adheres t
 
 ## Unreleased
 
+[Compare: v1.0.1 → `HEAD`](https://github.com/northwood-labs/tomlrt-cli/compare/v1.0.1..HEAD)
+
+### <!-- ZZZ -->:gear: Miscellaneous Tasks
+
+* [`941b9b6`](https://github.com/northwood-labs/tomlrt-cli/commit/941b9b65ec7ea6fcd405fe710ce77d8995d4ed89): Enhance tooling and add release tagging support. ([@skyzyx](https://github.com/skyzyx))
+
+## 1.0.1 — 2026-06-11
+
 ### :books: Documentation
 
 * [`a79be0e`](https://github.com/northwood-labs/tomlrt-cli/commit/a79be0e77dc332f7312bf2b2d9cfaf438fb522ce): Added `CHANGELOG.md` file for project tracking. ([@skyzyx](https://github.com/skyzyx))
